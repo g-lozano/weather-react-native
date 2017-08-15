@@ -15,7 +15,7 @@ export const fetchData = () => {
 	return (dispatch, func) => {
 		axios.get('')
 		.then((data)=>{
-			cb(dispatch, data.data.weather)
+			cb(dispatch, data.data.list)
 		})
 	}
 }

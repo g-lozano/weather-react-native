@@ -17,7 +17,7 @@ class App extends Component {
 			<Provider store={store}>
 				<View style={{ flex: 1 }}>
 					<Header headerText="Weather"/>
-					<DayView />
+					<DailyPager />
 				</View>
 			</Provider>
 		)
