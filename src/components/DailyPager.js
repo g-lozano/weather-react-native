@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, ViewPagerAndroid } from 'react-native'
+import { View, Text, ScrollView, Platform, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchData } from '../actions'
 import DayView from './DayView'
+
+const deviceWidth = Dimensions.get('window').width;
 
 class DailyPager extends Component {
 	componentWillMount() {
@@ -15,7 +17,7 @@ class DailyPager extends Component {
 			if (index == 0) today = true
 			
 			return(
-				<View key={index}>
+				<View key={index} style={{flex: 1, width: deviceWidth}}>
 					<DayView day={day} today={today}/>
 				</View>
 			)
@@ -25,16 +27,21 @@ class DailyPager extends Component {
 	renderViewPager() {
 		if (!this.props.daily_data.length)
 			return(
-				<View style={{flex: 1}}>
-					<Text>loading...</Text>
+				<View style={{flex: 1, justifyContent: 'center', backgroundColor: '#2B2B2B'}}>
+					<Text style={{alignSelf: 'center', color: 'white', fontSize: 25}}>loading...</Text>
 				</View>
 			)
-		else
-			return(
-				<ViewPagerAndroid style={{flex: 1}}>
+		else {
+			return (
+				<ScrollView
+					horizontal
+					pagingEnabled
+				>
 					{this.renderViews()}
-				</ViewPagerAndroid>
-			)
+				</ScrollView>
+			)			
+		}
+			
 	}
 
 	render() {
