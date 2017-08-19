@@ -3,10 +3,29 @@ import { View, Text, ScrollView, Platform, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchData } from '../actions'
 import DayView from './DayView'
+import { TabNavigator } from 'react-navigation'
 
 const deviceWidth = Dimensions.get('window').width;
 
 class DailyPager extends Component {
+	static navigationOptions = ({ navigation }) => {
+		return{
+			title: 'Daily Weather',
+			headerLeft: (
+				<Text>&lt;</Text>
+			),
+			headerTitleStyle: {
+				alignSelf: 'center',
+				textAlign: 'center',
+				color: '#4E76C9',
+				fontSize: 25
+			},
+			headerStyle: {
+				backgroundColor: '#2B2B2B'
+			}
+		}
+	}
+
 	componentWillMount() {
 		this.props.fetchData()
 	}

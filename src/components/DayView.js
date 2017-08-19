@@ -21,7 +21,6 @@ class DayView extends Component {
 			case 'Thunderstorm':
 				return require('../weather_icons/Thunderstorm.png')
 			case 'Rain':
-				return require('../weather_icons/Rain.png')
 			case 'Drizzle':
 				return require('../weather_icons/Rain.png')
 			case 'Snow':

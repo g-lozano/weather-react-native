@@ -17,6 +17,7 @@ const Input = ( { placeholder, value, onChangeText, label, secureTextEntry, onKe
 				onKeyPress={onKeyPress}
 				autoCorrect={false}
 				placeholderTextColor='gray'
+				keyboardType='numeric'
 			/>
 		</View>
 	)

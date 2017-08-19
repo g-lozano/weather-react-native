@@ -3,7 +3,8 @@ import axios from 'axios'
 const APPID = ''
 
 import { 
-	FETCH_DATA
+	FETCH_DATA,
+	ZIP_CHANGED
 } from './types'
 
 const cb = (dispatch, data) => {
@@ -19,5 +20,18 @@ export const fetchData = () => {
 		.then((data)=>{
 			cb(dispatch, data.data.list)
 		})
+	}
+}
+
+export const zipChange = (zip) => {
+	return {
+		type: ZIP_CHANGED,
+		payload: zip
+	}
+}
+
+export const search = (navigate) => {
+	return (dispatch, func) => {
+		console.log(func().search.zip)
 	}
 }

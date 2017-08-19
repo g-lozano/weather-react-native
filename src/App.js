@@ -8,16 +8,23 @@ import { View, Text, ViewPagerAndroid, ToastAndroid } from 'react-native';
 import { Header } from './components/'
 import DailyPager from './components/DailyPager'
 import DayView from './components/DayView'
+import LocationInput from './components/LocationInput'
+
+import { StackNavigator } from 'react-navigation'
 
 class App extends Component {
 	render() {
 		const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
 
+		const Screens = StackNavigator({
+			search: { screen: LocationInput },
+			dailypager: { screen: DailyPager },
+			dayview: { screen: DayView }
+		})
 		return(
 			<Provider store={store}>
 				<View style={{ flex: 1 }}>
-					<Header headerText="Weather App"/>
-					<DailyPager />
+					<Screens />
 				</View>
 			</Provider>
 		)
