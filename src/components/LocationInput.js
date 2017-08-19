@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, CardSection, Input, Button } from './'
-import { zipChange, search } from '../actions'
+import { zipChange, fetchData } from '../actions'
 
 class LocationInput extends Component {
 	static navigationOptions = {
@@ -25,7 +25,7 @@ class LocationInput extends Component {
 	}
 
 	searchHandler() {
-		this.props.search()
+		this.props.fetchData(this.props.navigation.navigate)
 	}
 
 	render() {
@@ -53,7 +53,6 @@ class LocationInput extends Component {
 }
 
 const mapStateToProps = ( { search } ) => {
-	console.log(search)
 	return {
 		zip: search.zip
 	}
@@ -66,7 +65,7 @@ const styles = {
 	}
 }
 
-export default connect(mapStateToProps, { zipChange, search })(LocationInput)
+export default connect(mapStateToProps, { zipChange, fetchData })(LocationInput)
 
 
 

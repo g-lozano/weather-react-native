@@ -10,24 +10,20 @@ const deviceWidth = Dimensions.get('window').width;
 class DailyPager extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return{
-			title: 'Daily Weather',
+			title: `${navigation.state.params.title}`,
 			headerLeft: (
 				<Text>&lt;</Text>
 			),
 			headerTitleStyle: {
 				alignSelf: 'center',
 				textAlign: 'center',
-				color: '#4E76C9',
-				fontSize: 25
+				color: 'gray',
+				fontSize: 20
 			},
 			headerStyle: {
 				backgroundColor: '#2B2B2B'
 			}
 		}
-	}
-
-	componentWillMount() {
-		this.props.fetchData()
 	}
 
 	renderViews() {
@@ -60,7 +56,6 @@ class DailyPager extends Component {
 				</ScrollView>
 			)			
 		}
-			
 	}
 
 	render() {
@@ -73,8 +68,10 @@ class DailyPager extends Component {
 }
 
 const mapStateToProps = ({ weather }) => {
+	const { daily_data, city } = weather
 	return {
-		daily_data: weather.daily_data
+		daily_data,
+		city
 	}
 }
 

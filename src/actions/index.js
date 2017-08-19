@@ -4,34 +4,26 @@ const APPID = ''
 
 import { 
 	FETCH_DATA,
-	ZIP_CHANGED
+	ZIP_CHANGED,
+	ZIP_ERROR
 } from './types'
 
-const cb = (dispatch, data) => {
-	dispatch({
+const cb = async (dispatch, data, navigate) => {
+	await dispatch({
 		type: FETCH_DATA,
 		payload: data
 	})
+	navigate('dailypager', { title: data.city.name })
 }
 
-export const fetchData = () => {
-	return (dispatch, func) => {
-		axios.get('https://api.openweathermap.org/data/2.5/forecast/daily?zip=95131,us&cnt=10&units=imperial&APPID=' + APPID)
-		.then((data)=>{
-			cb(dispatch, data.data.list)
-		})
-	}
+export const fetchData = (navigate) => async (dispatch, func) => {
+	let { data } = await axios.get('https://api.openweathermap.org/data/2.5/forecast/daily?cnt=10&units=imperial&zip='+func().search.zip+'&APPID=' + APPID)
+	cb(dispatch, data, navigate)
 }
 
 export const zipChange = (zip) => {
 	return {
 		type: ZIP_CHANGED,
 		payload: zip
-	}
-}
-
-export const search = (navigate) => {
-	return (dispatch, func) => {
-		console.log(func().search.zip)
 	}
 }
