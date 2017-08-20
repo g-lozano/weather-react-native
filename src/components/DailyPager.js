@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, Platform, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import { fetchData } from '../actions'
 import DayView from './DayView'
 import { TabNavigator } from 'react-navigation'
 
@@ -9,17 +8,7 @@ const deviceWidth = Dimensions.get('window').width;
 
 class DailyPager extends Component {
 	static navigationOptions = ({ navigation }) => {
-		return{
-			title: `${navigation.state.params.title}`,
-			headerLeft: (
-				<Text>&lt;</Text>
-			),
-			headerTitleStyle: {
-				alignSelf: 'center',
-				textAlign: 'center',
-				color: 'gray',
-				fontSize: 20
-			},
+		return {
 			headerStyle: {
 				backgroundColor: '#2B2B2B'
 			}
@@ -75,4 +64,4 @@ const mapStateToProps = ({ weather }) => {
 	}
 }
 
-export default connect(mapStateToProps, { fetchData })(DailyPager)
+export default connect(mapStateToProps)(DailyPager)

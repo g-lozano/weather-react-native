@@ -2,10 +2,16 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, CardSection, Input, Button } from './'
-import { zipChange, fetchData } from '../actions'
+import { zipChange, fetchDailyData, fetchHourlyData } from '../actions'
 
 class LocationInput extends Component {
 	static navigationOptions = {
+		headerTitleStyle: {
+			alignSelf: 'center',
+			textAlign: 'center',
+			color: 'gray',
+			fontSize: 20
+		},
 		headerStyle: {
 			backgroundColor: '#2B2B2B'
 		}
@@ -25,7 +31,8 @@ class LocationInput extends Component {
 	}
 
 	searchHandler() {
-		this.props.fetchData(this.props.navigation.navigate)
+		this.props.fetchDailyData(this.props.navigation.navigate)
+		// this.props.fetchHourlyData()
 	}
 
 	render() {
@@ -34,7 +41,7 @@ class LocationInput extends Component {
 				<Card>
 					<CardSection>
 						<Input
-							placeholder="Enter Zip Code"
+							placeholder="Set Postal/Zip Code"
 							onChangeText={this.onZipChange.bind(this)}
 							onKeyPress={this.onKeyPress.bind(this)}
 							value={this.props.zip}
@@ -65,7 +72,7 @@ const styles = {
 	}
 }
 
-export default connect(mapStateToProps, { zipChange, fetchData })(LocationInput)
+export default connect(mapStateToProps, { zipChange, fetchDailyData, fetchHourlyData })(LocationInput)
 
 
 

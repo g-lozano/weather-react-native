@@ -9,8 +9,9 @@ import { Header } from './components/'
 import DailyPager from './components/DailyPager'
 import DayView from './components/DayView'
 import LocationInput from './components/LocationInput'
+import HourlyList from './components/HourlyList'
 
-import { StackNavigator } from 'react-navigation'
+import { StackNavigator, TabNavigator } from 'react-navigation'
 
 class App extends Component {
 	render() {
@@ -18,9 +19,22 @@ class App extends Component {
 
 		const Screens = StackNavigator({
 			search: { screen: LocationInput },
-			dailypager: { screen: DailyPager },
-			dayview: { screen: DayView }
+			weather: { 
+				screen: TabNavigator({
+					Daily: { screen: DailyPager },
+					Hourly: { screen: HourlyList }
+				}, {
+					tabBarOptions: {
+						inactiveBackgroundColor: '#2B2B2B',
+						activeBackgroundColor: '#2B2B2B',
+						labelStyle: {
+							fontSize: 18,
+						}
+					}
+				})
+			}
 		})
+
 		return(
 			<Provider store={store}>
 				<View style={{ flex: 1 }}>

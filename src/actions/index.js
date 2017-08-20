@@ -3,22 +3,27 @@ import axios from 'axios'
 const APPID = ''
 
 import { 
-	FETCH_DATA,
+	FETCH_DAILY_DATA,
+	FETCH_HOURLY_DATA,
 	ZIP_CHANGED,
 	ZIP_ERROR
 } from './types'
 
-const cb = async (dispatch, data, navigate) => {
+export const fetchDailyData = (navigate) => async (dispatch, func) => {
+	let { data } = await axios.get('https://api.openweathermap.org/data/2.5/forecast/daily?cnt=10&units=imperial&zip='+func().search.zip+'&APPID=' + APPID)
 	await dispatch({
-		type: FETCH_DATA,
+		type: FETCH_DAILY_DATA,
 		payload: data
 	})
-	navigate('dailypager', { title: data.city.name })
+	navigate('weather', { title: data.city.name })
 }
 
-export const fetchData = (navigate) => async (dispatch, func) => {
-	let { data } = await axios.get('https://api.openweathermap.org/data/2.5/forecast/daily?cnt=10&units=imperial&zip='+func().search.zip+'&APPID=' + APPID)
-	cb(dispatch, data, navigate)
+export const fetchHourlyData = () => async (dispatch, func) => {
+	let { data } = await axios.get('https://api.openweathermap.org/data/2.5/forecast?units=imperial&zip='+func().search.zip+'&APPID=' + APPID)
+	dispatch({
+		type: FETCH_HOURLY_DATA,
+		data: data
+	})
 }
 
 export const zipChange = (zip) => {
