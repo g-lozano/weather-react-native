@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, Platform, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import DayView from './DayView'
 import { TabNavigator } from 'react-navigation'
+import { Header, DayView } from './'
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -31,8 +31,8 @@ class DailyPager extends Component {
 	renderViewPager() {
 		if (!this.props.daily_data.length)
 			return(
-				<View style={{flex: 1, justifyContent: 'center', backgroundColor: '#2B2B2B'}}>
-					<Text style={{alignSelf: 'center', color: 'white', fontSize: 25}}>loading...</Text>
+				<View style={styles.containerStyle}>
+					<Text style={styles.textStyle}>loading...</Text>
 				</View>
 			)
 		else {
@@ -50,9 +50,23 @@ class DailyPager extends Component {
 	render() {
 		return(
 			<View style={{flex: 1}}>
+				<Header headerText={this.props.city}/>
 				{this.renderViewPager()}
 			</View>
 		)
+	}
+}
+
+const styles = {
+	textStyle: {
+		alignSelf: 'center', 
+		color: 'white', 
+		fontSize: 25
+	},
+	containerStyle: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: '#2B2B2B'
 	}
 }
 

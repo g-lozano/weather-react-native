@@ -20,9 +20,9 @@ export const fetchDailyData = (navigate) => async (dispatch, func) => {
 
 export const fetchHourlyData = () => async (dispatch, func) => {
 	let { data } = await axios.get('https://api.openweathermap.org/data/2.5/forecast?units=imperial&zip='+func().search.zip+'&APPID=' + APPID)
-	dispatch({
+	await dispatch({
 		type: FETCH_HOURLY_DATA,
-		data: data
+		payload: data
 	})
 }
 

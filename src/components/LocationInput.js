@@ -30,9 +30,9 @@ class LocationInput extends Component {
 			this.searchHandler()
 	}
 
-	searchHandler() {
+	searchHandler = () => {
 		this.props.fetchDailyData(this.props.navigation.navigate)
-		// this.props.fetchHourlyData()
+		this.props.fetchHourlyData()
 	}
 
 	render() {

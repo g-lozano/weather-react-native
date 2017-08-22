@@ -7,6 +7,7 @@ const INITIAL_STATE = {
 	hourly_data: [],
 	daily_data: [],
 	view_type: 'today_list',
+	city: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,7 +23,8 @@ export default (state = INITIAL_STATE, action) => {
 		case FETCH_HOURLY_DATA:
 			return {
 				...state,
-				hourly_data: action.payload.list
+				hourly_data: action.payload.list,
+				city: action.payload.city.name
 			}
 
 		default:
