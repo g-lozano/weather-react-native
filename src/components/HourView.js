@@ -1,33 +1,69 @@
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 
-class HourView extends Component {
-	render() {
-		const { main: { temp }, weather, dt_txt } = this.props.data
+import getIcon from '../functions/getIcon'
 
-		const hour = dt_txt.split(' ')[1]
+const SHORT_DAY = [
+	'SUN',
+	'MON',
+	'TUES',
+	'WED',
+	'THURS',
+	'FRI',
+	'SAT'
+]
+
+
+class HourView extends Component {
+	getTime(time) {
+		const hour = time.getHours() + 1
+		const i = (time.getDay() + (hour === 24 ? 1 : 0))%7
+
+		var formatted_hour = ''
+
+		if (hour == 24) formatted_hour = '12 AM'
+		else if (hour < 12) formatted_hour = hour + ' AM'
+		else if (hour > 12) formatted_hour =  hour%12 + ' PM'
+		else formatted_hour =  '12 PM'
+
+		return formatted_hour + ', ' + SHORT_DAY[i]
+	}
+	render() {
+		const { main: { temp }, weather, dt_txt, dt } = this.props.data
+
+		var i = new Date(dt*1000);
+
+		const time = this.getTime(i)
+		const icon = getIcon(weather[0].main)
 
 		return (
 			<View style={styles.itemStyle}>
-				<View style={[styles.textViewStyle, { paddingLeft: 10 }]}>
+				<View style={[styles.textViewStyle, { flex: 3, alignItems: 'center' }]}>
+					<Text style={styles.textStyle}>
+						{time}
+					</Text>
+				</View>
+
+				<View style={[styles.textViewStyle, { flex: 1 }]}>
 					<Text style={styles.textStyle}>
 						{Math.round(temp)+'° F'}
 					</Text>
 				</View>
 
-				<View style={styles.textViewStyle}>
-					<Text style={styles.textStyle}>
-						{hour}
-					</Text>
+				<View style={{ flex: 1, paddingRight: 7 }}>
+					<Image
+			          style={{width: 40, height: 40}}
+			          source={icon}
+			        />
 				</View>
 
-				<View style={styles.textViewStyle}>
+				<View style={[styles.textViewStyle, { flex: 1 }]}>
 					<Text style={styles.textStyle}>
 						{weather[0].main}
 					</Text>
 				</View>
 
-				<View style={styles.textViewStyle}>
+				<View style={[styles.textViewStyle, { flex: 3, alignItems: 'center' }]}>
 					<Text style={styles.textStyle}>
 						{weather[0].description}
 					</Text>
@@ -39,17 +75,17 @@ class HourView extends Component {
 
 const styles = {
 	itemStyle: {
-		height: 30,
 		borderTopWidth: 1,
 		borderColor: 'gray',
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
+		padding: 5
 	},
 	textStyle: {
 		color: 'white'
 	},
 	textViewStyle: {
-		paddingRight: 10
+		paddingRight: 5
 	}
 }
 

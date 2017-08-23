@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 
+import getIcon from '../functions/getIcon'
+
 const DAYS = [
 	'Sunday',
 	'Monday',
@@ -12,23 +14,7 @@ const DAYS = [
 ]
 
 class DayView extends Component {
-	getIcon(weather) {
-		switch(weather) {
-			case 'Clear':
-				return require('../weather_icons/Clear.png')
-			case 'Thunderstorm':
-				return require('../weather_icons/Thunderstorm.png')
-			case 'Rain':
-			case 'Drizzle':
-				return require('../weather_icons/Rain.png')
-			case 'Snow':
-				return require('../weather_icons/Snow.png')
-			case 'Clouds':
-				return require('../weather_icons/Clear.png')
-			default:
-				return require('../weather_icons/Clear.png')
-		}
-	}
+	
 
 	render() {
 		const { containerStyle, dayStyle, mainStyle, descStyle } = styles
@@ -40,7 +26,7 @@ class DayView extends Component {
 		var dayOfWeek = DAYS[i.getDay()]
 		if (this.props.today) dayOfWeek = 'Today'
 
-		var icon = this.getIcon(weather[0].main)
+		var icon = getIcon(weather[0].main)
 
 		return(
 			<View style={containerStyle}>
