@@ -1,4 +1,4 @@
-import { 
+import {
 	ZIP_CHANGED,
 	ZIP_ERROR
 } from '../actions/types'

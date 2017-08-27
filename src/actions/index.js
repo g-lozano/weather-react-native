@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const APPID = ''
 
-import { 
+import {
 	FETCH_DAILY_DATA,
 	FETCH_HOURLY_DATA,
 	ZIP_CHANGED,

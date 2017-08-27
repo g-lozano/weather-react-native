@@ -1,25 +1,23 @@
-import { 
+import {
 	FETCH_DAILY_DATA,
 	FETCH_HOURLY_DATA
 } from '../actions/types'
 
-const INITIAL_STATE = { 
+const INITIAL_STATE = {
 	hourly_data: [],
 	daily_data: [],
-	view_type: 'today_list',
 	city: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case FETCH_DAILY_DATA:
-			return { 
-				...state, 
-				daily_data: action.payload.list, 
+			return {
+				...state,
+				daily_data: action.payload.list,
 				city: action.payload.city.name,
-				error: '' 
 			}
-		
+
 		case FETCH_HOURLY_DATA:
 			return {
 				...state,
