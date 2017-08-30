@@ -26,7 +26,9 @@ class HourView extends Component {
 		else if (hour > 12) formatted_hour =  hour%12 + ' PM'
 		else formatted_hour =  '12 PM'
 
-		return formatted_hour + ', ' + SHORT_DAY[i]
+		var day = SHORT_DAY[i]
+
+		return { formatted_hour, day }
 	}
 	render() {
 		const { main: { temp }, weather, dt_txt, dt } = this.props.data
@@ -38,9 +40,12 @@ class HourView extends Component {
 
 		return (
 			<View style={styles.itemStyle}>
-				<View style={[styles.textViewStyle, { flex: 3, alignItems: 'center' }]}>
+				<View style={[styles.textViewStyle, { flex: 1, alignItems: 'center' }]}>
 					<Text style={styles.textStyle}>
-						{time}
+						{time.formatted_hour}
+					</Text>
+					<Text style={styles.textStyle}>
+						{time.day}
 					</Text>
 				</View>
 
@@ -82,7 +87,8 @@ const styles = {
 		padding: 5
 	},
 	textStyle: {
-		color: 'white'
+		color: 'white',
+		fontSize: 12
 	},
 	textViewStyle: {
 		paddingRight: 5
