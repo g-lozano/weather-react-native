@@ -8,7 +8,7 @@ The app displays the daily and 3-hourly weather at a location set by the user.
 
 ## .gif demo
 
-![alt](./src/images/WeatherApp.gif)
+![alt](./src/images/WeatherApp1.gif)
 
 ## Credits
 
