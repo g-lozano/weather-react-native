@@ -14,7 +14,7 @@ const DAYS = [
 ]
 
 class DayView extends Component {
-	
+
 
 	render() {
 		const { containerStyle, dayStyle, mainStyle, descStyle } = styles
@@ -23,17 +23,17 @@ class DayView extends Component {
 		const { main, description } = weather[0]
 
 		var i = new Date(dt*1000);
-		var dayOfWeek = DAYS[i.getDay()]
-		if (this.props.today) dayOfWeek = 'Today'
+		var dayOfWeek = this.props.today ? 'Today' : DAYS[i.getDay()]
+		var timeOfDay = dayOfWeek === 'Today' ? new Date().getHours() : 12
 
-		var icon = getIcon(weather[0].main)
+		var icon = getIcon(weather[0].main, timeOfDay)
 
 		return(
 			<View style={containerStyle}>
 				<View style={{ flex: 1 }}>
 					<Text style={dayStyle}>{dayOfWeek}</Text>
 				</View>
-				
+
 				<View style={{ flex: 3 }}>
 					<Image
 			          style={{width: 100, height: 100}}
@@ -41,7 +41,7 @@ class DayView extends Component {
 			        />
 					<Text style={mainStyle}>{main}</Text>
 				</View>
-				
+
 				<View style={{ flex: 1 }}>
 					<Text style={descStyle}>{Math.round(temp.day)+'° F'}</Text>
 					<Text style={descStyle}>{description}</Text>

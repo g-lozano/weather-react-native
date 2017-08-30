@@ -13,7 +13,6 @@ const SHORT_DAY = [
 	'SAT'
 ]
 
-
 class HourView extends Component {
 	getTime(time) {
 		const hour = time.getHours() + 1
@@ -36,7 +35,7 @@ class HourView extends Component {
 		var i = new Date(dt*1000);
 
 		const time = this.getTime(i)
-		const icon = getIcon(weather[0].main)
+		const icon = getIcon(weather[0].main, i.getHours())
 
 		return (
 			<View style={styles.itemStyle}>
